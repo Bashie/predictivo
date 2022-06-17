@@ -1,0 +1,62 @@
+@startuml "Diagrama de clase"
+left to right direction
+
+enum FunciónSintáctica {
+    VERVO
+    SUSTANTIVO
+    ADJETIVO
+}
+
+class Usuario {
+    #id : Integer
+    #nombre : String
+    #apellido : String
+    #email : String
+    #password : String
+}
+
+Class Pictograma {
+    #id: Integer
+    #nombre : String
+    #imagen: String
+    #categoría: Categoría
+    #funciónSintactica: FunciónSintáctica
+}
+
+Class Categoría {
+    #id: Integer
+    #nombre : String
+    #carpeta: String
+}
+
+Class PredicciónPictograma {
+	#id: Integer
+	#fraseInicial: ArrayList<Pictograma>
+	#próximoPictograma: Pictograma
+	#peso: Integer
+	#usuario: Usuario
+}
+
+Class PredicciónSintáctica {
+	#id: Integer
+	#tipoInicial: FunciónSintáctica
+	#próximoTipo: FunciónSintáctica
+	#peso: Integer
+}
+
+Class FraseUsada {
+	#id: Integer
+	#frase: ArrayList<Pictograma>
+	#usuario: Usuario
+}
+
+Pictograma *-- Categoría
+PredicciónPictograma *-- Pictograma
+PredicciónPictograma *-- Pictograma
+PredicciónPictograma *-- Usuario  
+Pictograma *-- FunciónSintáctica 
+PredicciónSintáctica *-- FunciónSintáctica
+PredicciónSintáctica *-- FunciónSintáctica
+FraseUsada *-- Pictograma
+FraseUsada *-- Usuario  
+@enduml

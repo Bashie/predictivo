@@ -1,0 +1,38 @@
+@startuml "DER"
+left to right direction
+hide circle
+
+Entity Usuario {
+    * id : integer
+    --
+    * nombre : varchar
+    * apellido : varchar
+    * email : varchar
+    * password : varchar
+}
+
+Entity Pictograma {
+    #id: integer
+    --
+    #nombre : varchar
+    #imagen: varchar
+    #categoria: varchar
+    #funcionSintactica: varchar
+}
+
+Entity FraseUsada {
+	#id: integer
+	--
+	#frase: varchar
+	#pictogramaId: integer <<FK>>
+	#pocision: integer
+	#usuarioId: integer <<FK>>
+	#orderSintactico: varchar
+	--
+	#cantidadUsos: integer
+	
+}
+
+FraseUsada }o..|{ Usuario  
+FraseUsada }o..|{ Pictograma 
+@enduml
