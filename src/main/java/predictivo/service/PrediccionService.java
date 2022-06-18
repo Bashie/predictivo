@@ -54,7 +54,7 @@ public class PrediccionService {
 	}
 
 	private List<PictogramaDto> getPredicciones(List<Pictograma> fraseUsada) {
-		return prediccionPictogramaDao.getPredicciones();
+		return null;//prediccionPictogramaDao.getPredicciones();
 	}
 
 	private Pictograma getPictograma(String id) {

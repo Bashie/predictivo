@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Component;
 
+import predictivo.model.FuncionSintactica;
 import predictivo.model.Pictograma;
 
 @Component
@@ -23,5 +24,10 @@ public class PictogramaDao extends BaseDAO<Pictograma> {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	public List<Pictograma> findByCategoria(Integer categoria) {
+		TypedQuery<Pictograma> q = entityManager.createQuery("select p from Pictograma p where p.funcionSintactica = :funcion_sintactica", Pictograma.class).setParameter("funcion_sintactica", FuncionSintactica.SUSTANTIVO);
+		return q.getResultList();
 	}
 }

@@ -38,12 +38,5 @@ public class UsuarioController {
 		}
 	}
 	
-	@RequestMapping("/users/misdatos")
-	@ResponseBody
-	public String getMisDatos(@RequestBody JsonNode payload) {
-		logger.info("Mis Datos usuario: " + payload.get("dni").asText());
-		return usuarioService.getDatos(payload.get("dni").asText());
-	}
-	
 	//TODO crear usuario
 }

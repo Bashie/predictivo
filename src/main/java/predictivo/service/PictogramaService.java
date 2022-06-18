@@ -2,6 +2,7 @@ package predictivo.service;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +107,10 @@ public class PictogramaService {
 		System.out.println("pictograma : " + pictograma.toString());
 		pictogramaDao.save(pictograma);
 		return 1;
+	}
+	
+	public List<Pictograma> getPictogramas(Integer categoria) {
+		return pictogramaDao.findByCategoria(categoria);
+		
 	}
 }

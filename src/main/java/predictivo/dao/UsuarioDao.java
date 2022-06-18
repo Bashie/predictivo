@@ -17,7 +17,7 @@ public class UsuarioDao extends BaseDAO<Usuario> {
 	}
 
 	public Usuario findByUsername(String username) throws NoResultException {
-		TypedQuery<Usuario> q = entityManager.createQuery("select t from Usuario t where email=:username", Usuario.class).setParameter("username", Integer.parseInt(username));
+		TypedQuery<Usuario> q = entityManager.createQuery("select t from Usuario t where email=:username", Usuario.class).setParameter("username", username);
 		return q.getSingleResult();
 	}
     
