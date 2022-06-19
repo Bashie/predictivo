@@ -23,7 +23,7 @@ Logger logger = LoggerFactory.getLogger(CargaPictogramasController.class);
 	
 	@RequestMapping("/cargaPictogramas/{from}/{to}")
 	@ResponseBody
-	public String cargarPictogramas(@PathVariable(name="from", required = true) Integer from, @PathVariable(name="to", required = true) Integer to) {
+	public String cargarPictogramas(@PathVariable(name="from", required = true) Integer from, @PathVariable(name="to", required = true) Integer to) throws InterruptedException {
 		if (from <= to) {
 			return "Pictogramas cargados: " + pictogramaService.cargarPictogramas(from, to);
 		}

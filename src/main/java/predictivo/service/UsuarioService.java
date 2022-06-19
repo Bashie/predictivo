@@ -51,7 +51,7 @@ public class UsuarioService {
 		JsonObject json = new JsonObject();
 		json.addProperty("email", usuario.getEmail());
 		json.addProperty("nombre", usuario.getNombre());
-		json.addProperty("id", usuario.getId());
+		json.addProperty("usuarioId", usuario.getId());
 		json.addProperty("token", UsuarioService.getJWTToken(String.valueOf(usuario.getId())));
 		return json.toString();
 	}

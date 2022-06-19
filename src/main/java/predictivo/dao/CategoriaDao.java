@@ -24,4 +24,18 @@ public class CategoriaDao extends BaseDAO<Categoria> {
 			return null;
 		}
 	}
+	
+	public Categoria findByNameIngles(String nombreCategoria) {
+		TypedQuery<Categoria> q = entityManager.createQuery("select c from Categoria c where c.nombreIngles = :nombreIngles", Categoria.class).setParameter("nombreIngles", nombreCategoria);
+		try {
+			return q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	
+	public List<Categoria> findAllByTipo(Integer tipo) {
+		TypedQuery<Categoria> q = entityManager.createQuery("select c from Categoria c", Categoria.class);
+		return q.getResultList();
+	}
 }

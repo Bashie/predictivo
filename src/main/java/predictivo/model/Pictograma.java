@@ -1,7 +1,7 @@
 package predictivo.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +25,7 @@ public class Pictograma implements Guardable {
 	@ManyToMany()
 	@JoinTable(name = "PICTOGRAMA_CATEGORIA", joinColumns = {
 			@JoinColumn(name = "PICTOGRAMA_ID") }, inverseJoinColumns = { @JoinColumn(name = "CATEGORIA_ID") })
-	private List<Categoria> categorias = new ArrayList<Categoria>();
+	private Set<Categoria> categorias = new HashSet<Categoria>();
 	private FuncionSintactica funcionSintactica;
 
 	public Integer getId() {
@@ -52,11 +52,11 @@ public class Pictograma implements Guardable {
 		this.imagen = imagen;
 	}
 
-	public List<Categoria> getCategorias() {
+	public Set<Categoria> getCategorias() {
 		return categorias;
 	}
 
-	public void setCategorias(List<Categoria> categorias) {
+	public void setCategorias(HashSet<Categoria> categorias) {
 		this.categorias = categorias;
 	}
 
@@ -82,5 +82,4 @@ public class Pictograma implements Guardable {
 		return "Pictograma [id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", categorias=" + categorias
 				+ ", funcionSintactica=" + funcionSintactica + "]";
 	}
-
 }

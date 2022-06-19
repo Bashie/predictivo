@@ -9,8 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import predictivo.controller.dto.FraseUsadaDto;
 
@@ -22,8 +23,9 @@ public class FraseUsada implements Guardable {
 	private Integer id;
 	@ManyToOne()
 	private Usuario usuario;
-	@Transient
-	private List<Pictograma> frase = new ArrayList<>();
+	@OneToMany(mappedBy="fraseUsada")
+	@OrderBy("orden")
+	private List<FraseUsadaOrden> frase = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -33,11 +35,11 @@ public class FraseUsada implements Guardable {
 		this.id = id;
 	}
 
-	public List<Pictograma> getFrase() {
+	public List<FraseUsadaOrden> getFrase() {
 		return frase;
 	}
 
-	public void setFrase(List<Pictograma> frase) {
+	public void setFrase(List<FraseUsadaOrden> frase) {
 		this.frase = frase;
 	}
 
@@ -53,7 +55,14 @@ public class FraseUsada implements Guardable {
 		FraseUsadaDto dto = new FraseUsadaDto();
 		dto.setId(getId());
 		dto.setUsuario(getUsuario());
-		dto.setFrase(getFrase().stream().map(pictograma -> pictograma.toDto()).collect(Collectors.toList()));
+		dto.setFrase(getFrase().stream().map(orden -> orden.getPictograma().toDto()).collect(Collectors.toList()));
 		return dto;
+	}
+
+	public void addFrase(List<Pictograma> fraseUsada) {
+		Integer i = 0;
+		for (Pictograma pictograma : fraseUsada) {
+			frase.add(new FraseUsadaOrden(i, pictograma, this));
+		}
 	}
 }

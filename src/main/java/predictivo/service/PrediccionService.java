@@ -2,6 +2,7 @@ package predictivo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,16 +26,16 @@ public class PrediccionService {
 	@Autowired
 	private UsuarioDao usuarioDao;
 	
-	public List<PictogramaDto> getPredicciones(String[] ids, Integer usuarioId) {
+	public List<PictogramaDto> getPredicciones(List<PictogramaDto> fraseUsada , Integer usuarioId) {
 
-		List<Pictograma> fraseUsada = new ArrayList<>();
-		for (String id : ids) {
-			fraseUsada.add(getPictograma(id));
+		List<Pictograma> pictosUsados = new ArrayList<>();
+		for (PictogramaDto pictoDto : fraseUsada) {
+			pictosUsados.add(getPictograma(pictoDto.getId()));
 		}
 
-		List<PictogramaDto> prediccion = getPredicciones(fraseUsada);
+		List<PictogramaDto> prediccion = getPredicciones(pictosUsados);
 		
-		fraseUsadaDao.save(getFraseUsada(fraseUsada, usuarioId));
+		fraseUsadaDao.save(getFraseUsada(pictosUsados, usuarioId));
 		
 		calcularMatrizDePesos();
 		
@@ -43,7 +44,7 @@ public class PrediccionService {
 
 	private FraseUsada getFraseUsada(List<Pictograma> fraseUsada, Integer usuarioId) {
 		FraseUsada frase = new FraseUsada();
-		frase.setFrase(fraseUsada);
+		frase.addFrase(fraseUsada);
 		frase.setUsuario(usuarioDao.findById(usuarioId));		
 		return frase;
 	}
@@ -54,11 +55,12 @@ public class PrediccionService {
 	}
 
 	private List<PictogramaDto> getPredicciones(List<Pictograma> fraseUsada) {
-		return null;//prediccionPictogramaDao.getPredicciones();
+		return pictogramaDao.findAll().stream().map(Pictograma::toDto).collect(Collectors.toList());
 	}
 
-	private Pictograma getPictograma(String id) {
-		return pictogramaDao.findById(Integer.parseInt(id));
+	private Pictograma getPictograma(Integer id) {
+		return pictogramaDao.findById(id);
 	}
+
 
 }

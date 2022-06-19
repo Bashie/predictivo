@@ -11,23 +11,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import predictivo.controller.dto.PictogramaDto;
-import predictivo.service.PictogramaService;
+import predictivo.model.Categoria;
+import predictivo.service.CategoriaService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class PictogramaController {
+public class CategoriaController {
 
-	Logger logger = LoggerFactory.getLogger(PictogramaController.class);
+	Logger logger = LoggerFactory.getLogger(CategoriaController.class);
 	
 	@Autowired
-	private PictogramaService pictogramaService;
+	private CategoriaService categoriaService;
 	
-	@RequestMapping("/pictogramas/{categoria}")
+	@RequestMapping("/categorias/{tipo}")
 	@ResponseBody
-	public List<PictogramaDto> getPictogramas(@PathVariable(name="categoria", required = true) Integer categoria) {
-		return pictogramaService.getPictogramas(categoria);
-		
+	public List<Categoria> getPictogramas(@PathVariable(name="tipo", required = true) Integer tipo) {
+		return categoriaService.getCategorias(tipo);
 	}
 	
 }
