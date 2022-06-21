@@ -63,10 +63,10 @@ public class PrediccionService {
 		BuscarPictosPrediccion(frase, resultado, pred);
 		pred = fraseUsadaDao.getPrediccionesTodosLosUsuarios(frase);
 		BuscarPictosPrediccion(frase, resultado, pred);
-		List<Pictograma> pictos = pictogramaDao.findAllMaxResultados(5);
-		
-		for (int i = resultado.size(); resultado.size() < 5; i++) {
-			resultado.add(pictos.get(i).toDto());
+		List<Pictograma> pictos = pictogramaDao.findAllMaxResultados(20);
+		Integer i = 0;
+		while (resultado.size() < 5) {
+			resultado.add(pictos.get(i++).toDto());
 		}
 		return resultado;
 	}

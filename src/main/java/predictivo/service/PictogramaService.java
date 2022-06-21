@@ -192,9 +192,6 @@ public class PictogramaService {
 	}
 
 	public List<PictogramaDto> getPictogramas(Integer tipo, Integer categoria) {
-
-		
-		
-		return null;
+		return pictogramaDao.findByCategoriaYTipo(tipo, categoria).stream().map(Pictograma::toDto).collect(Collectors.toList());
 	}
 }

@@ -40,4 +40,13 @@ public class PictogramaDao extends BaseDAO<Pictograma> {
 				.setParameter("funcion_sintactica", FuncionSintactica.fromDbValue(categoria)).setMaxResults(50);
 		return q.getResultList();
 	}
+	
+	public List<Pictograma> findByCategoriaYTipo(Integer tipo, Integer categoria) {
+		TypedQuery<Pictograma> q = entityManager
+				.createQuery("select p from Pictograma p join p.categorias c where p.funcionSintactica = :funcion_sintactica and c.id=:categoria", Pictograma.class)
+				.setParameter("funcion_sintactica", FuncionSintactica.fromDbValue(tipo))
+				.setParameter("categoria", categoria)
+				.setMaxResults(50);
+		return q.getResultList();
+	}
 }
