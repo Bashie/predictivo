@@ -30,4 +30,11 @@ public class PictogramaController {
 		
 	}
 	
+	@RequestMapping("/pictogramas/{tipo}/{categoria}")
+	@ResponseBody
+	public List<PictogramaDto> getPictogramasPorCat(@PathVariable(name="tipo", required = true) Integer tipo, @PathVariable(name="categoria", required = true) Integer categoria) {
+		return pictogramaService.getPictogramas(tipo, categoria);
+		
+	}
+	
 }

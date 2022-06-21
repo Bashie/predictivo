@@ -28,5 +28,4 @@ public class CategoriaController {
 	public List<Categoria> getPictogramas(@PathVariable(name="tipo", required = true) Integer tipo) {
 		return categoriaService.getCategorias(tipo);
 	}
-	
 }

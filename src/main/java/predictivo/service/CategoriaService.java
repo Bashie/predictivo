@@ -14,7 +14,7 @@ public class CategoriaService {
 	private CategoriaDao categoriaDao;
 
 	public List<Categoria> getCategorias(Integer tipo) {
-
 		return categoriaDao.findAllByTipo(tipo);
 	}
+
 }

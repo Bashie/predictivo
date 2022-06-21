@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Component;
 
 import predictivo.model.Categoria;
+import predictivo.model.FuncionSintactica;
 
 @Component
 public class CategoriaDao extends BaseDAO<Categoria> {
@@ -35,7 +36,7 @@ public class CategoriaDao extends BaseDAO<Categoria> {
 	}
 	
 	public List<Categoria> findAllByTipo(Integer tipo) {
-		TypedQuery<Categoria> q = entityManager.createQuery("select c from Categoria c", Categoria.class);
+		TypedQuery<Categoria> q = entityManager.createQuery("select distinct(c) from Pictograma p join p.categorias c where p.funcionSintactica = :tipo", Categoria.class).setParameter("tipo", FuncionSintactica.fromDbValue(tipo));
 		return q.getResultList();
 	}
 }

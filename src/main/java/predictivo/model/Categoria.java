@@ -16,7 +16,16 @@ public class Categoria implements Guardable {
 	private Integer id;
 	private String nombre;
 	private String nombreIngles;
-	
+
+	public Categoria(Integer id, String nombre, String nombreIngles) {
+		this.id = id;
+		this.nombre = nombre;
+		this.nombreIngles = nombreIngles;
+	}
+
+	public Categoria() {
+		
+	}
 	public Integer getId() {
 		return id;
 	}

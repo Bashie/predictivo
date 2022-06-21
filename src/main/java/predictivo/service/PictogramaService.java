@@ -185,7 +185,16 @@ public class PictogramaService {
     }
 	
 	public List<PictogramaDto> getPictogramas(Integer categoria) {
-		return pictogramaDao.findByCategoria(categoria).stream().map(Pictograma::toDto).collect(Collectors.toList());
+		if(categoria >= 0) {
+			return pictogramaDao.findByCategoria(categoria).stream().map(Pictograma::toDto).collect(Collectors.toList());
+		}
+		return pictogramaDao.findAll().stream().map(Pictograma::toDto).collect(Collectors.toList());
+	}
 
+	public List<PictogramaDto> getPictogramas(Integer tipo, Integer categoria) {
+
+		
+		
+		return null;
 	}
 }

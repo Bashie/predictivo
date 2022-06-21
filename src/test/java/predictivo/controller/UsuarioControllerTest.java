@@ -49,7 +49,7 @@ public class UsuarioControllerTest {
 		String json = "{\"username\":\"mi@email.com\",\"password\":\"6NJFknbaKhr9P4WeOtTrzQ==\"}";
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = mapper.readTree(json);
-		doThrow(new InvalidLoginException()).when(usuarioService).login(any(), any());
+		doThrow(new InvalidLoginException("Clave inválida")).when(usuarioService).login(any(), any());
 		
 		String result = usuarioController.login(node);
 		

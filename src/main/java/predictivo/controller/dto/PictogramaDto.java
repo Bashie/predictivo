@@ -62,15 +62,13 @@ public class PictogramaDto {
 
 	@Override
 	public String toString() {
-		return "PictogramaDto [id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", categoria=" + categoria
-				+ ", funcionSintactica=" + funcionSintactica + "]";
+		return "PictogramaDto [id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", categoria=" + categoria + ", funcionSintactica=" + funcionSintactica + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((categoria == null) ? 0 : categoria.hashCode());
 		result = prime * result + ((funcionSintactica == null) ? 0 : funcionSintactica.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((imagen == null) ? 0 : imagen.hashCode());

@@ -38,5 +38,17 @@ public class UsuarioController {
 		}
 	}
 	
-	//TODO crear usuario
+	@RequestMapping("/users/register")
+	@CrossOrigin(origins = "http://localhost:3000")
+	@ResponseBody
+	public String register(@RequestBody JsonNode payload) {
+		logger.info("Login usuario: " + payload.get("username").textValue());
+		try {
+			return usuarioService.register(payload.get("username").textValue(), payload.get("password").textValue(), payload.get("nombre").textValue(), payload.get("apellido").textValue());
+		} catch (InvalidLoginException e) {
+			JsonObject json = new JsonObject();
+			json.addProperty("error", e.getMessage());
+			return json.toString();
+		}
+	}
 }

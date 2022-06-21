@@ -28,6 +28,11 @@ public class PictogramaDao extends BaseDAO<Pictograma> {
 		}
 	}
 
+	public List<Pictograma> findAllMaxResultados(Integer maxResultados) {
+		TypedQuery<Pictograma> q = entityManager.createQuery("select p from Pictograma p", Pictograma.class).setMaxResults(maxResultados);
+		return q.getResultList();
+	}
+	
 	public List<Pictograma> findByCategoria(Integer categoria) {
 		TypedQuery<Pictograma> q = entityManager
 				.createQuery("select p from Pictograma p where p.funcionSintactica = :funcion_sintactica",
