@@ -36,17 +36,25 @@ public class FraseUsadaDao extends BaseDAO<FraseUsada> {
     	FraseUsada frase = this.getFraseUsada(entity);
 		if(Objects.isNull(frase)) {
 			this.persist(entity);
+			frase = entity;
 		} else {
 			frase.addUso();
 			this.update(entity);
 		}
-		return entity;
+		return frase;
 	}
     
     public List<FraseUsada> getPredicciones(FraseUsada fraseUsada) {
     	TypedQuery<FraseUsada> q = entityManager.createQuery("select f from FraseUsada f where pictogramaIds like :pictogramaIds and usuario=:usuario order by peso DESC", FraseUsada.class)
     			.setParameter("pictogramaIds", fraseUsada.getPictogramaIds()+"%")
     			.setParameter("usuario", fraseUsada.getUsuario());
+    	List<FraseUsada> frases = q.getResultList();
+    	return frases.stream().map(frase -> addPictos(frase)).collect(Collectors.toList());
+    }
+    
+    public List<FraseUsada> getPrediccionesTodosLosUsuarios(FraseUsada fraseUsada) {
+    	TypedQuery<FraseUsada> q = entityManager.createQuery("select f from FraseUsada f where pictogramaIds like :pictogramaIds order by peso DESC", FraseUsada.class)
+    			.setParameter("pictogramaIds", fraseUsada.getPictogramaIds()+"%");
     	List<FraseUsada> frases = q.getResultList();
     	return frases.stream().map(frase -> addPictos(frase)).collect(Collectors.toList());
     }

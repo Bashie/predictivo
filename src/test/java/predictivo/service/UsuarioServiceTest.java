@@ -11,8 +11,8 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
 import predictivo.dao.UsuarioDao;
-import predictivo.model.Usuario;
 import predictivo.service.exception.InvalidLoginException;
+import predictivo.util.UnitTestHelper;
 
 public class UsuarioServiceTest {
 
@@ -21,7 +21,6 @@ public class UsuarioServiceTest {
 	private UsuarioService usuarioService;
 	@Mock
 	private UsuarioDao usuarioDao;
-	private String usuario = "mi@mail.com";
 	private String clave = "test";
 	
 	
@@ -32,23 +31,13 @@ public class UsuarioServiceTest {
 	
 	@Test
 	public void loginTest() throws InvalidLoginException {
-		doReturn(getUsuario()).when(usuarioDao).findByUsername(usuario);
+		doReturn(UnitTestHelper.getUsuario()).when(usuarioDao).findByUsername(UnitTestHelper.USUARIO_EMAIL);
 		
-		String resultado = usuarioService.login(usuario, clave);
+		String resultado = usuarioService.login(UnitTestHelper.USUARIO_EMAIL, clave);
 		
-		Assertions.assertTrue(resultado.startsWith("{\"email\":\"mi@mail.com\",\"nombre\":\"ana\",\"id\":null,\"token\":"));
-		
-		
+		Assertions.assertTrue(resultado.startsWith("{\"email\":\"mi@email.com\",\"nombre\":\"MiNombre\",\"usuarioId\":2,\"token\":"));
 	}
-	
-	private Usuario getUsuario() {
-		Usuario user = new Usuario();
-		user.setApellido("Alguien");
-		user.setNombre("ana");
-		user.setClaveEncriptada("6NJFknbaKhr9P4WeOtTrzQ==");
-		user.setEmail(usuario);
-		return user;		
-	}
+
 	
 	
 	

@@ -33,10 +33,8 @@ public class PrediccionController {
 	@RequestMapping("/prediccion")
 	@ResponseBody
 	public Set<PictogramaDto> buscarPrediccion(@RequestBody JsonNode payload) throws JsonMappingException, JsonProcessingException {
-		System.out.println(payload.asText());
 		JsonNode fraseUsada = payload.get("fraseUsada");
 		Integer usuarioId = payload.get("usuarioId").intValue();
-		System.out.println(fraseUsada);
 		ObjectMapper mapper = new ObjectMapper();
 		CollectionType listType = mapper.getTypeFactory().constructCollectionType(ArrayList.class, PictogramaDto.class);
 		ArrayList<PictogramaDto> frase = mapper.readValue(fraseUsada.toString(), listType);

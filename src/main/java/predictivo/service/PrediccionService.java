@@ -60,14 +60,21 @@ public class PrediccionService {
 	private Set<PictogramaDto> getPredicciones(FraseUsada frase) {
 		Set<PictogramaDto> resultado = new HashSet<>();
 		List<FraseUsada> pred = fraseUsadaDao.getPredicciones(frase);
+		BuscarPictosPrediccion(frase, resultado, pred);
+		pred = fraseUsadaDao.getPrediccionesTodosLosUsuarios(frase);
+		BuscarPictosPrediccion(frase, resultado, pred);
+
+		
+		//return pictogramaDao.findAll().stream().map(Pictograma::toDto).collect(Collectors.toList());
+		return resultado;
+	}
+
+	private void BuscarPictosPrediccion(FraseUsada frase, Set<PictogramaDto> resultado, List<FraseUsada> pred) {
 		for (FraseUsada fraseUsada : pred) {
 			if (fraseUsada.getPictogramas().size() > frase.getPictogramas().size()) {
 				resultado.add(fraseUsada.getPictogramas().get(frase.getPictogramas().size()).toDto());
 			}
 		}
-		
-		//return pictogramaDao.findAll().stream().map(Pictograma::toDto).collect(Collectors.toList());
-		return resultado;
 	}
 
 	private Pictograma getPictograma(Integer id) {
