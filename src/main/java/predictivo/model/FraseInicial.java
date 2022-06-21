@@ -18,7 +18,7 @@ public class FraseInicial implements Guardable {
 	private Pictograma pictograma;
 	@ManyToOne()
 	private PrediccionPictograma prediccionPictograma;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -50,5 +50,37 @@ public class FraseInicial implements Guardable {
 	public void setPrediccionPictograma(PrediccionPictograma prediccionPictograma) {
 		this.prediccionPictograma = prediccionPictograma;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		FraseInicial other = (FraseInicial) obj;
+		if (id.equals(other.id)) {
+			return true;
+		}
+		if (orden == null) {
+			if (other.orden != null) {
+				return false;
+			}
+		} else if (!orden.equals(other.orden)) {
+			return false;
+		}
+		if (pictograma == null) {
+			if (other.pictograma != null) {
+				return false;
+			}
+		} else if (!pictograma.equals(other.pictograma)) {
+			return false;
+		}
+		return true;
+	}
+
 }

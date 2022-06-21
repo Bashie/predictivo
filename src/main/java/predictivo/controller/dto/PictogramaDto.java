@@ -59,4 +59,12 @@ public class PictogramaDto {
 		json.addProperty("funcionSintactica", funcionSintactica);
 		return json;
 	}
+
+	@Override
+	public String toString() {
+		return "PictogramaDto [id=" + id + ", nombre=" + nombre + ", imagen=" + imagen + ", categoria=" + categoria
+				+ ", funcionSintactica=" + funcionSintactica + "]";
+	}
+	
+	
 }

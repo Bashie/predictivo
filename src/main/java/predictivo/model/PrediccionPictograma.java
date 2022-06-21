@@ -69,4 +69,49 @@ public class PrediccionPictograma implements Guardable {
 		dto.setPeso(getPeso());
 		return dto;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((fraseInicial == null) ? 0 : fraseInicial.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
+		result = prime * result + ((proximoPictograma == null) ? 0 : proximoPictograma.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PrediccionPictograma other = (PrediccionPictograma) obj;
+		if (fraseInicial == null) {
+			if (other.fraseInicial != null)
+				return false;
+		} else if (!fraseInicial.equals(other.fraseInicial))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (peso == null) {
+			if (other.peso != null)
+				return false;
+		} else if (!peso.equals(other.peso))
+			return false;
+		if (proximoPictograma == null) {
+			if (other.proximoPictograma != null)
+				return false;
+		} else if (!proximoPictograma.equals(other.proximoPictograma))
+			return false;
+		return true;
+	}
+	
+	
 }

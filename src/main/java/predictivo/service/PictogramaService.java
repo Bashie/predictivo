@@ -128,6 +128,7 @@ public class PictogramaService {
 			pictograma.getCategorias().add(categoria);
 		}
 
+		pictograma.setAarasacId(pictogramaId);
 		System.out.println("pictograma : " + pictograma.toString());
 		if (pictograma.getCategorias().isEmpty()) {
 			return 0;

@@ -14,4 +14,11 @@ public class PrediccionPictogramaDao extends BaseDAO<PrediccionPictograma> {
 		TypedQuery<PrediccionPictograma> q = entityManager.createQuery("select p from PrediccionPictograma p", PrediccionPictograma.class);
 		return q.getResultList();
 	}
+    
+    public void crearPredicciones() {
+    	
+    	
+    	
+    }
+    
 }
