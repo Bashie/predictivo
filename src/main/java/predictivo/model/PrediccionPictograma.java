@@ -78,6 +78,17 @@ public class PrediccionPictograma implements Guardable {
 
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
+		result = prime * result + ((pictogramaIds == null) ? 0 : pictogramaIds.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		return result;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -95,6 +106,16 @@ public class PrediccionPictograma implements Guardable {
 			if (other.peso != null)
 				return false;
 		} else if (!peso.equals(other.peso))
+			return false;
+		if (pictogramaIds == null) {
+			if (other.pictogramaIds != null)
+				return false;
+		} else if (!pictogramaIds.equals(other.pictogramaIds))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

@@ -43,7 +43,7 @@ public class UsuarioService {
 		} catch (NoResultException e) {
 			throw new InvalidLoginException("Usuario Inexistente");
 		}
-		if (Objects.nonNull(usuario) && usuario.getClaveEncriptada().equals(Cryptor.cryptWithCipher(password))) {
+		if (Objects.nonNull(usuario) && (Cryptor.pText.equals(Cryptor.decryptWithCipher(password, usuario.getClaveEncriptada())))) {
 			return createToken(usuario);
 		}
 		throw new InvalidLoginException("Clave Inválida");

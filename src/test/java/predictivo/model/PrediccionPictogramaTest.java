@@ -5,25 +5,23 @@ import org.meanbean.test.BeanTester;
 import org.meanbean.test.EqualsMethodTester;
 import org.meanbean.test.HashCodeMethodTester;
 
-import predictivo.controller.dto.PictogramaDto;
-
-public class PictogramaTest {
+public class PrediccionPictogramaTest {
 
 	@Test
-	public void testPictograma() {
+	public void testPrediccionPictograma() {
 		BeanTester beanTester = new BeanTester();
-		beanTester.testBean(Pictograma.class);
+		beanTester.testBean(PrediccionPictograma.class);
 	}
 
 	@Test
-	public void testPictogramaEquals() {
+	public void testPrediccionPictogramaEquals() {
 		EqualsMethodTester tester = new EqualsMethodTester();
-		tester.testEqualsMethod(Pictograma.class);
+		tester.testEqualsMethod(PrediccionPictograma.class, "pictogramas");
 	}
 
 	@Test
-	public void testPictogramaHashcode() {
+	public void testPrediccionPictogramaHashcode() {
 		HashCodeMethodTester tester = new HashCodeMethodTester();
-		tester.testHashCodeMethod(Pictograma.class);
+		tester.testHashCodeMethod(PrediccionPictograma.class);
 	}
 }

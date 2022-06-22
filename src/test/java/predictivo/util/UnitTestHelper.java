@@ -21,7 +21,7 @@ public class UnitTestHelper {
 	public static final Integer FRASEUSADA_PESO = 5;
 	public static final String USUARIO_APELLIDO = "MiApellido";
 	public static final String USUARIO_NOMBRE = "MiNombre";
-	public static final String USUARIO_CLAVE_ENCRIPTADA = "6NJFknbaKhr9P4WeOtTrzQ==";
+	public static final String USUARIO_CLAVE_ENCRIPTADA = "c082AAGOCsZsj8hHoQnBpIWRLGvmMNPnRCQLBM3zGcLc3lh4MJ0sK4cQCVRzdqyZMsee+KrCcHNMKtyDi7fEg+Y=";
 	public static final String USUARIO_EMAIL = "mi@email.com";
 	private static final Integer USUARIO_ID = 2;
 	public static final Integer AARASAC_ID = 123;
