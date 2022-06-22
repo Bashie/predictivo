@@ -43,4 +43,13 @@ public class FraseUsadaDw {
 		this.peso = peso;
 	}
 
+	@Override
+	public String toString() {
+		return "FraseUsadaDw [id=" + id + ", pictogramaIds=" + pictogramaIds + ", peso=" + peso + "]";
+	}
+
+	public void addPeso(Integer peso) {
+		this.peso += peso;		
+	}
+
 }

@@ -29,11 +29,25 @@ Para embeber la inteligencia artificial en su propia web deberá comunicarse con
 
 ```
 /users/authenticate   				{ "username": username, "password": password }
+(Inicio de sesion para usuarios)
+
 /users/register   				{ "username": username, "password": password, "nombre": nombre, "apellido": apellido }
+(Registro de usuario)
+
 /pictogramas/{tipo}   				'Bearer ' + Token
+(Cargar pictogramas segun función sintáctica)
+
 /pictogramas/{tipo}/{categoria}   		'Bearer ' + Token
+(Cargar pictogramas por función sintáctica y categoría)
+
 /categorias/{tipo}   				'Bearer ' + Token
+(Listado de categorías)
+
 /prediccion   					{ "fraseUsada": pictos, "usuarioId": usuarioId } 'Bearer ' + Token
+(Predicción según frase usada)
+
+/cargarDw					'Bearer ' + Token
+(Sincronizar con el DataWarehouse)
 ```
 
 ##Condiciones de uso

@@ -10,7 +10,7 @@ import predictivo.model.FraseUsadaDw;
 public interface ItemRepository extends MongoRepository<FraseUsadaDw, String> {
 
 	@Query("{pictogramaIds:'?0'}")
-	FraseUsadaDw findItemByName(String name);
+	FraseUsadaDw findItemByPictoIds(String pictogramaIds);
 
 	@Query(value = "{pictogramaIds:'?0'}", fields = "{'pictogramaIds' : 1, 'peso' : 1}")
 	List<FraseUsadaDw> findAll(String pictogramaIds);
