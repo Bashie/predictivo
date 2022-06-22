@@ -6,55 +6,57 @@ Class Usuario {
     #nombre : String
     #apellido : String
     #email : String
-    #password : String
+    #clave_encriptada : String
 }
 
 Class Pictograma {
     #id: Integer
     #nombre : String
     #imagen: String
-    #categoria: Categoria
-    #funcionSintactica: String
+    #aarasac_id: Integer
+    #funcion_sintactica: Integer
 }
 
 Class Categoria {
     #id: Integer
     #nombre : String
-    #carpeta: String
+    #nombre_ingles: String
 }
 
-Class PrediccionPictograma {
+Class Pictograma_Categoria {
+    #categoria_id: Integer
+    #pictograma_id: Integer
+}
+
+Class Prediccion_Pictograma {
 	#id: Integer
-	#fraseInicial: ArrayList<FraseInicial>
-	#proximoPictograma: Pictograma
+	#pictograma_ids: String
 	#peso: Integer
-	#usuario: Usuario
 }
 
-Class FraseInicial {
-	#id: Integer
-	#pictograma: Pictograma
-	#orden: Integer
-}
-
-Class PrediccionSintáctica {
+Class Prediccion_Sintáctica {
 	#id: Integer
 	#tipoInicial: String
 	#proximoTipo: String
 	#peso: Integer
 }
 
-Class FraseUsada {
+Class Frase_Usada {
 	#id: Integer
-	#pictograma: Pictograma
-	#orden: Integer
-	#usuario: Usuario
+	#pictograma_ids: String
+	#peso: Integer
+	#usuario_id: Integer
 }
 
-Pictograma "1" -- "0..*" Categoria
-PrediccionPictograma "0..*" -- "1" Pictograma
-PrediccionPictograma "0..*" -- "0..*" FraseInicial
-PrediccionPictograma "0..*" -- "0..1" Usuario 
-FraseUsada "0..*" -- "1" Pictograma
-FraseUsada "0..*" -- "1" Usuario 
+Class Frase_Usada_Dw {
+	#peso: Integer
+	#pictograma_ids: String
+}
+
+Frase_Usada "0..*" -- "1" Usuario
+Pictograma_Categoria "0..*" -- "0..*" Categoria
+Pictograma_Categoria "0..*" -- "0..*" Pictograma
+Prediccion_Pictograma "0..*" -- "1" Pictograma
+Frase_Usada "0..*" -- "1" Pictograma
+Frase_Usada "0..*" -- "1" Frase_Usada_Dw 
 @enduml

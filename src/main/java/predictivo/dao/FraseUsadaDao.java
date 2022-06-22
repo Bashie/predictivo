@@ -23,7 +23,9 @@ public class FraseUsadaDao extends BaseDAO<FraseUsada> {
 	}
     
     public FraseUsada getFraseUsada(FraseUsada fraseUsada) {
-    	TypedQuery<FraseUsada> q = entityManager.createQuery("select f from FraseUsada f where pictogramaIds=:pictogramaIds", FraseUsada.class).setParameter("pictogramaIds", fraseUsada.getPictogramaIds());
+    	TypedQuery<FraseUsada> q = entityManager.createQuery("select f from FraseUsada f where pictogramaIds=:pictogramaIds and usuario=:usuario", FraseUsada.class)
+    			.setParameter("pictogramaIds", fraseUsada.getPictogramaIds())
+    			.setParameter("usuario", fraseUsada.getUsuario());
 		try {
 			return q.getSingleResult();
 		} catch (Exception e) {
@@ -39,7 +41,7 @@ public class FraseUsadaDao extends BaseDAO<FraseUsada> {
 			frase = entity;
 		} else {
 			frase.addUso();
-			this.update(entity);
+			this.update(frase);
 		}
 		return frase;
 	}

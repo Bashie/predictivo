@@ -1,62 +1,99 @@
 @startuml "Diagrama de clase"
 left to right direction
 
-enum FunciónSintáctica {
-    VERVO
-    SUSTANTIVO
-    ADJETIVO
+enum FuncionSintactica [[java:predictivo.model.FuncionSintactica]] {
+	VERVO
+	SUSTANTIVO
+	ADJETIVO
+	dbValue
+	-FuncionSintactica(dbValue: Integer)
+	+getDbValue(): Integer
+	+{static} fromDbValue(dbValue: Integer): FuncionSintactica
 }
 
-class Usuario {
-    #id : Integer
-    #nombre : String
-    #apellido : String
-    #email : String
-    #password : String
+class Usuario [[java:predictivo.model.Usuario]] {
+	-id: Integer
+	-nombre: String
+	-apellido: String
+	-email: String
+	-claveEncriptada: String
+	+toDto(): UsuarioDto
 }
 
-Class Pictograma {
-    #id: Integer
-    #nombre : String
-    #imagen: String
-    #categoría: Categoría
-    #funciónSintactica: FunciónSintáctica
+class Pictograma [[java:predictivo.model.Pictograma]] {
+	-id: Integer
+	-nombre: String
+	-imagen: String
+	-categorias: Set<Categoria>
+	-funcionSintactica: FuncionSintactica
+	-aarasacId: Integer
+	+toDto(): PictogramaDto
+	+toString(): String
+	+hashCode(): int
+	+equals(obj: Object): boolean
 }
 
-Class Categoría {
-    #id: Integer
-    #nombre : String
-    #carpeta: String
+class Categoria [[java:predictivo.model.Categoria]] {
+	-id: Integer
+	-nombre: String
+	-nombreIngles: String
+	+Categoria(id: Integer, nombre: String, nombreIngles: String)
+	+Categoria()
+	+toDto(): CategoriaDto
+	+toString(): String
 }
 
-Class PredicciónPictograma {
-	#id: Integer
-	#fraseInicial: ArrayList<Pictograma>
-	#próximoPictograma: Pictograma
-	#peso: Integer
-	#usuario: Usuario
+class PrediccionPictograma [[java:predictivo.model.PrediccionPictograma]] {
+	-id: Integer
+	-usuario: Usuario
+	-pictogramaIds: String
+	-peso: Integer
+	-pictogramas: List<Pictograma>
+	+toDto(): PrediccionPictogramaDto
+	+equals(obj: Object): boolean
 }
 
-Class PredicciónSintáctica {
-	#id: Integer
-	#tipoInicial: FunciónSintáctica
-	#próximoTipo: FunciónSintáctica
-	#peso: Integer
+class PrediccionSintactica [[java:predictivo.model.PrediccionSintactica]] {
+	-id: Integer
+	-tipoInicial: FuncionSintactica
+	-proximoTipo: FuncionSintactica
+	-peso: Integer
 }
 
-Class FraseUsada {
-	#id: Integer
-	#frase: ArrayList<Pictograma>
-	#usuario: Usuario
+class FraseUsada [[java:predictivo.model.FraseUsada]] {
+	-id: Integer
+	-usuario: Usuario
+	-pictogramaIds: String
+	-peso: Integer
+	-pictogramas: List<Pictograma>
+	+addFrase(fraseUsada: List<Pictograma>): void
+	+toString(): String
+	+addUso(): void
 }
 
-Pictograma *-- Categoría
-PredicciónPictograma *-- Pictograma
-PredicciónPictograma *-- Pictograma
-PredicciónPictograma *-- Usuario  
-Pictograma *-- FunciónSintáctica 
-PredicciónSintáctica *-- FunciónSintáctica
-PredicciónSintáctica *-- FunciónSintáctica
+class FraseUsadaDw [[java:predictivo.model.FraseUsadaDw]] {
+	-id: String
+	-pictogramaIds: String
+	-peso: Integer
+	+FraseUsadaDw(pictogramaIds: String, peso: Integer)
+}
+
+interface Guardable {
+}
+
+Guardable <|.. PrediccionSintactica
+Guardable <|.. PrediccionPictograma
+Guardable <|.. Pictograma
+Guardable <|.. Usuario
+Guardable <|.. FraseUsada
+Guardable <|.. Categoria
+Pictograma *-- Categoria
+PrediccionPictograma *-- Pictograma
+PrediccionPictograma *-- Usuario  
+Pictograma *-- FuncionSintactica
+PrediccionSintactica *-- FuncionSintactica
+PrediccionSintactica *-- FuncionSintactica
 FraseUsada *-- Pictograma
 FraseUsada *-- Usuario  
 @enduml
+

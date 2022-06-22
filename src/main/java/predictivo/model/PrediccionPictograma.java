@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import predictivo.controller.dto.PrediccionPictogramaDto;
 
@@ -21,12 +22,12 @@ public class PrediccionPictograma implements Guardable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@OneToMany(mappedBy="prediccionPictograma")
-	@OrderBy("orden")
-	private List<FraseInicial> fraseInicial = new ArrayList<>();
 	@ManyToOne()
-	private Pictograma proximoPictograma;
-	private Integer peso;
+	private Usuario usuario;
+	private String pictogramaIds = "";
+	private Integer peso = 0;
+	@Transient
+	private List<Pictograma> pictogramas = new ArrayList<>();
 
 	public Integer getId() {
 		return id;
@@ -36,20 +37,28 @@ public class PrediccionPictograma implements Guardable {
 		this.id = id;
 	}
 
-	public List<FraseInicial> getFraseInicial() {
-		return fraseInicial;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setFraseInicial(List<FraseInicial> fraseInicial) {
-		this.fraseInicial = fraseInicial;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
-	public Pictograma getProximoPictograma() {
-		return proximoPictograma;
+	public String getPictogramaIds() {
+		return pictogramaIds;
 	}
 
-	public void setProximoPictograma(Pictograma proximoPictograma) {
-		this.proximoPictograma = proximoPictograma;
+	public void setPictogramaIds(String pictogramaIds) {
+		this.pictogramaIds = pictogramaIds;
+	}
+
+	public List<Pictograma> getPictogramas() {
+		return pictogramas;
+	}
+
+	public void setPictogramas(List<Pictograma> pictogramas) {
+		this.pictogramas = pictogramas;
 	}
 
 	public Integer getPeso() {
@@ -63,23 +72,10 @@ public class PrediccionPictograma implements Guardable {
 	public PrediccionPictogramaDto toDto() {
 		PrediccionPictogramaDto dto = new PrediccionPictogramaDto();
 		dto.setId(getId());
-		dto.setProximoPictograma(getProximoPictograma().toDto());
-		dto.setFraseInicial(
-				getFraseInicial().stream().map(frase -> frase.getPictograma().toDto()).collect(Collectors.toList()));
 		dto.setPeso(getPeso());
 		return dto;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((fraseInicial == null) ? 0 : fraseInicial.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
-		result = prime * result + ((proximoPictograma == null) ? 0 : proximoPictograma.hashCode());
-		return result;
-	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -90,11 +86,6 @@ public class PrediccionPictograma implements Guardable {
 		if (getClass() != obj.getClass())
 			return false;
 		PrediccionPictograma other = (PrediccionPictograma) obj;
-		if (fraseInicial == null) {
-			if (other.fraseInicial != null)
-				return false;
-		} else if (!fraseInicial.equals(other.fraseInicial))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -104,11 +95,6 @@ public class PrediccionPictograma implements Guardable {
 			if (other.peso != null)
 				return false;
 		} else if (!peso.equals(other.peso))
-			return false;
-		if (proximoPictograma == null) {
-			if (other.proximoPictograma != null)
-				return false;
-		} else if (!proximoPictograma.equals(other.proximoPictograma))
 			return false;
 		return true;
 	}
