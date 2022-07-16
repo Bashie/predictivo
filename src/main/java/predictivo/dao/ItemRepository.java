@@ -12,8 +12,8 @@ public interface ItemRepository extends MongoRepository<FraseUsadaDw, String> {
 	@Query("{pictogramaIds:'?0'}")
 	FraseUsadaDw findItemByPictoIds(String pictogramaIds);
 
-	@Query(value = "{pictogramaIds:'?0'}", fields = "{'pictogramaIds' : 1, 'peso' : 1}")
-	List<FraseUsadaDw> findAll(String pictogramaIds);
+	@Override
+	List<FraseUsadaDw> findAll();
 
 	public long count();
 

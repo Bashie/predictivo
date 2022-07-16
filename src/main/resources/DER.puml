@@ -58,5 +58,5 @@ Pictograma_Categoria "0..*" -- "0..*" Categoria
 Pictograma_Categoria "0..*" -- "0..*" Pictograma
 Prediccion_Pictograma "0..*" -- "1" Pictograma
 Frase_Usada "0..*" -- "1" Pictograma
-Frase_Usada "0..*" -- "1" Frase_Usada_Dw 
+Pictograma "0..*" -- "1" Frase_Usada_Dw 
 @enduml

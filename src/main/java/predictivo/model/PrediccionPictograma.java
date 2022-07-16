@@ -22,8 +22,6 @@ public class PrediccionPictograma implements Guardable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@ManyToOne()
-	private Usuario usuario;
 	private String pictogramaIds = "";
 	private Integer peso = 0;
 	@Transient
@@ -35,14 +33,6 @@ public class PrediccionPictograma implements Guardable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public String getPictogramaIds() {
@@ -76,6 +66,17 @@ public class PrediccionPictograma implements Guardable {
 		return dto;
 	}
 
+	public static PrediccionPictograma fromFraseUsadaDw(Integer peso, String pictoIds) {
+		PrediccionPictograma prediccionPictograma = new PrediccionPictograma();
+		prediccionPictograma.setPeso(peso);
+		prediccionPictograma.setPictogramaIds(pictoIds);
+		return prediccionPictograma;
+	}
+
+	@Override
+	public String toString() {
+		return "PrediccionPictograma [id=" + id + ", pictogramaIds=" + pictogramaIds + ", peso=" + peso + "]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -84,7 +85,6 @@ public class PrediccionPictograma implements Guardable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
 		result = prime * result + ((pictogramaIds == null) ? 0 : pictogramaIds.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
 
@@ -111,11 +111,6 @@ public class PrediccionPictograma implements Guardable {
 			if (other.pictogramaIds != null)
 				return false;
 		} else if (!pictogramaIds.equals(other.pictogramaIds))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
 			return false;
 		return true;
 	}

@@ -1,19 +1,12 @@
 package predictivo.dao;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import javax.annotation.Resource;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.Transactional;
-import javax.transaction.UserTransaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -21,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import predictivo.model.FraseUsadaDw;
 import predictivo.model.Pictograma;
+import predictivo.model.PrediccionPictograma;
 
 @Component
 @EnableMongoRepositories
@@ -29,22 +23,46 @@ public class DwDao {
 
 	@Autowired 
 	private PictogramaDao pictogramaDao;
-	
 	@PersistenceContext
 	protected EntityManager entityManager;
-
 	@Autowired
 	private ItemRepository frasesItemRepo;
+	@Autowired
+	private PrediccionPictogramaDao prediccionPictogramaDao;
 	
 	public void syncBaseADw() {
 		cargar();
 		limpiarTabla();
+		traerDatos();
+	}
 
+	private void traerDatos() {
+		List<FraseUsadaDw> resultados = frasesItemRepo.findAll();
+
+		for (FraseUsadaDw fraseUsadaDw : resultados) {
+			try {
+				PrediccionPictograma pred = PrediccionPictograma.fromFraseUsadaDw(fraseUsadaDw.getPeso(), getLocalIds(fraseUsadaDw.getPictogramaIds()));
+				System.out.println(pred);
+				prediccionPictogramaDao.save(pred);
+			} catch (NoResultException e) {
+				//saltear porque no existe el picto local
+			}
+		}
+		
+	}
+
+	private String getLocalIds(String pictogramaIds) throws NoResultException {
+		String[] ids = pictogramaIds.split(",");
+		StringBuffer localIds = new StringBuffer();
+		for (String id : ids) {
+			Pictograma picto = pictogramaDao.findByAarasacId(Integer.parseInt(id));
+			localIds.append(picto.getId() + "," );
+		}
+		return localIds.toString();
 	}
 
 	private void limpiarTabla() {
 		entityManager.createNativeQuery("DELETE FROM frase_usada_dw").executeUpdate();
-		
 	}
 
 	private void cargar() {

@@ -15,6 +15,7 @@ import predictivo.dao.PrediccionPictogramaDao;
 import predictivo.dao.UsuarioDao;
 import predictivo.model.FraseUsada;
 import predictivo.model.Pictograma;
+import predictivo.model.PrediccionPictograma;
 
 @Component
 public class PrediccionService {
@@ -63,6 +64,8 @@ public class PrediccionService {
 		BuscarPictosPrediccion(frase, resultado, pred);
 		pred = fraseUsadaDao.getPrediccionesTodosLosUsuarios(frase);
 		BuscarPictosPrediccion(frase, resultado, pred);
+		List<PrediccionPictograma> predGenerica = prediccionPictogramaDao.getPredicciones(frase);
+		BuscarPictosPrediccionGenerica(frase, resultado, predGenerica);
 		List<Pictograma> pictos = pictogramaDao.findAllMaxResultados(20);
 		Integer i = 0;
 		while (resultado.size() < 5) {
@@ -75,6 +78,14 @@ public class PrediccionService {
 		for (FraseUsada fraseUsada : pred) {
 			if (fraseUsada.getPictogramas().size() > frase.getPictogramas().size()) {
 				resultado.add(fraseUsada.getPictogramas().get(frase.getPictogramas().size()).toDto());
+			}
+		}
+	}
+	
+	private void BuscarPictosPrediccionGenerica(FraseUsada frase, Set<PictogramaDto> resultado, List<PrediccionPictograma> pred) {
+		for (PrediccionPictograma prediccion : pred) {
+			if (prediccion.getPictogramas().size() > frase.getPictogramas().size()) {
+				resultado.add(prediccion.getPictogramas().get(frase.getPictogramas().size()).toDto());
 			}
 		}
 	}

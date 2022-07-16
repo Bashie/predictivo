@@ -28,6 +28,13 @@ public class PictogramaDao extends BaseDAO<Pictograma> {
 		}
 	}
 
+	public Pictograma findByAarasacId(Integer aarasacId) throws NoResultException {
+		TypedQuery<Pictograma> q = entityManager
+				.createQuery("select p from Pictograma p where p.aarasacId = :aarasacId", Pictograma.class)
+				.setParameter("aarasacId", aarasacId);
+		return q.getSingleResult();
+	}
+	
 	public List<Pictograma> findAllMaxResultados(Integer maxResultados) {
 		TypedQuery<Pictograma> q = entityManager.createQuery("select p from Pictograma p", Pictograma.class).setMaxResults(maxResultados);
 		return q.getResultList();

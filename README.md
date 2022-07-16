@@ -1,11 +1,13 @@
-#Picto-AI
+#Picto-IA
 
 Picto-AI es un Sistema de Texto Predictivo Para Lenguaje de Pictogramas pertenieciente al Trabajo Final de Grado - Prototipado Tecnológico de la carrera: Licenciatura en Informática de la Universidad Siglo 21 de Maria Cecilia Gabelloni.
 
+---
 ##Demo
 
-Se podrá acceder a un video de una demo del prototipo en el siguiente [Link](www.link.aca)
+Se podrá acceder a un video de una demo del prototipo en el siguiente [Link](https://www.youtube.com/watch?v=C11c8iegkO4)
 
+---
 ##Uso
 
 El sistema puede utilizarse tanto desde la web como también acceder al backend embebido desde cualquier otra página y/o teclado virtual.
@@ -18,10 +20,11 @@ git clone https://github.com/Bashie/predictivo.git
 git clone https://github.com/Bashie/predictivoUI.git
 ```
 
-En ambas carpetas creadas se deberá correr el siguiente comando para generar los ejecutables:
+En las carpetas creadas se deberá correr el siguiente comando para generar los ejecutables:
 
 ```
-mvn clean install
+predictivo> mvn clean install
+predictivoUI> npm react-scripts build
 ```
 
 ---
@@ -50,6 +53,7 @@ Para embeber la inteligencia artificial en su propia web deberá comunicarse con
 (Sincronizar con el DataWarehouse)
 ```
 
+---
 ##Condiciones de uso
 El sistema enviará una vez por dia la información de uso (sin datos de usuario) al datawarehouse principal. De éste mismo, descargará los últimos pesos de los vectores de IA apra el uso del mismo.
 
