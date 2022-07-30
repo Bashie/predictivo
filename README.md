@@ -5,7 +5,7 @@ Picto-AI es un Sistema de Texto Predictivo Para Lenguaje de Pictogramas pertenie
 ---
 ##Demo
 
-Se podrá acceder a un video de una demo del prototipo en el siguiente [Link](https://www.youtube.com/watch?v=C11c8iegkO4)
+Se podrá acceder a un video de una demo del prototipo en el siguiente [Link](https://youtu.be/n4bIl8_QmFs)
 
 ---
 ##Uso
